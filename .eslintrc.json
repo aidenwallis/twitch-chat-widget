@@ -1,0 +1,47 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint", "react-hooks"],
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "rules": {
+      "@typescript-eslint/naming-convention": ["error", {
+        "selector": "interface",
+        "format": ["PascalCase"]
+      }],
+      "@typescript-eslint/array-type": "error",
+      "@typescript-eslint/prefer-for-of": "off",
+      "@typescript-eslint/prefer-non-null-assertion": "off",
+      "@typescript-eslint/explicit-module-boundary-types": "off",
+      "@typescript-eslint/no-empty-interface": "off",
+      "@typescript-eslint/no-non-null-assertion": "off",
+      "@typescript-eslint/explicit-function-return-type": "off",
+      "@typescript-eslint/camelcase": "off",
+      "camelcase": "off",
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
+      "react/no-typos": "error",
+      "react/no-direct-mutation-state": "error",
+      "react/no-deprecated": "error",
+      "react/jsx-no-duplicate-props": "error",
+      "import/first": "off"
+    },
+    "parserOptions": {
+      "ecmaVersion": 6,
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    },
+    "env": {
+      "jest": true,
+      "browser": true,
+      "es6": true
+    }
+  }
