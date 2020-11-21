@@ -18,6 +18,8 @@ export class TwitchConnection {
   private forceDisconnect = false;
   private state = ConnectionState.Disconnected;
   private messageCallback?: MessageCallback;
+  private userTimeoutCallback?: (login: string) => void;
+  private deleteMessageCallback?: (id: string) => void;
   private connectionTimeout?: NodeJS.Timer;
 
   public constructor(private login: string) {}
@@ -63,6 +65,14 @@ export class TwitchConnection {
     this.messageCallback = cb;
   }
 
+  public onUserTimeout(cb: (login: string) => void) {
+    this.userTimeoutCallback = cb;
+  }
+
+  public onDeleteMessage(cb: (id: string) => void) {
+    this.deleteMessageCallback = cb;
+  }
+
   private handleLine(line: string) {
     if (!line) return;
     const parsed = parseMessage(line);
@@ -77,6 +87,21 @@ export class TwitchConnection {
         return (
           this.messageCallback &&
           this.messageCallback(new ChatMessage(parsed))
+        );
+      }
+
+      case "CLEARCHAT": {
+        return (
+          this.userTimeoutCallback &&
+          this.userTimeoutCallback(parsed.trailing || "")
+        );
+      }
+
+      case "CLEARMSG": {
+        return (
+          parsed.tags["target-msg-id"] &&
+          this.deleteMessageCallback &&
+          this.deleteMessageCallback(parsed.tags["target-msg-id"])
         );
       }
     }

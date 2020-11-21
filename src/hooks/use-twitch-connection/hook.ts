@@ -2,9 +2,15 @@ import {useEffect, useState} from "react";
 import {ChatMessage} from "../../models";
 import {TwitchConnection} from "../../util/twitch-connection";
 
+interface HookCallbacks {
+  onMessage(message: ChatMessage): void;
+  onUserTimeout(login: string): void;
+  onDeleteMessage(id: string): void;
+}
+
 export function useTwitchConnection(
   login: string,
-  onMessage: (message: ChatMessage) => void,
+  callbacks: HookCallbacks,
 ): TwitchConnection {
   const [connection, setConnection] = useState<TwitchConnection>(
     new TwitchConnection(login),
@@ -20,8 +26,12 @@ export function useTwitchConnection(
   }, [login]);
 
   useEffect(() => {
-    connection && connection.onMessage(onMessage);
-  }, [connection, onMessage]);
+    if (connection) {
+      connection.onMessage(callbacks.onMessage);
+      connection.onUserTimeout(callbacks.onUserTimeout);
+      connection.onDeleteMessage(callbacks.onDeleteMessage);
+    }
+  }, [connection, callbacks]);
 
   return connection;
 }

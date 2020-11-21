@@ -4,9 +4,13 @@ import {ChatEmote} from "./chat-emote";
 import {ChatEmotePlacement} from "./chat-emote-placement";
 import {ChatMessageUser} from "./chat-message-user";
 
+// eslint-disable-next-line no-control-regex
+const isActionRegex = /^\u0001ACTION (.*)\u0001$/;
+
 export class ChatMessage {
   public readonly badges: ChatBadge[] = [];
   public readonly id: string = "";
+  public readonly isAction: boolean = false;
   public readonly content: string = "";
   public readonly emotes: ChatEmote[] = [];
   public readonly user: ChatMessageUser;
@@ -14,8 +18,14 @@ export class ChatMessage {
 
   public constructor(private ircMessage: IRCMessage) {
     this.id = ircMessage.tags.id || "";
-
     this.content = ircMessage.trailing;
+
+    const actionMatch = ircMessage.trailing.match(isActionRegex);
+    if (actionMatch) {
+      this.content = actionMatch[1];
+      this.isAction = true;
+    }
+
     this.user = new ChatMessageUser(
       ircMessage.tags["user-id"] || "",
       ircMessage.prefix?.split("!")[0] || "",

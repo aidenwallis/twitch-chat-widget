@@ -1,6 +1,7 @@
 import * as React from "react";
 import {ChatMessage} from "../../models";
 import {TwitchAPIBadgeResponse} from "../../models/twitch-api";
+import {ColorCorrection} from "../../util/color-correction";
 import {ChatLineBadges} from "../chat-line-badges";
 import {ChatLineContent} from "../chat-line-content";
 import classes from "./styles.module.scss";
@@ -11,11 +12,16 @@ interface Props {
   message: ChatMessage;
 }
 
+const colorCorrector = new ColorCorrection();
+
 export const ChatLineComponent: React.FunctionComponent<Props> = ({
   channelBadges,
   globalBadges,
   message,
 }: Props) => {
+  const color = message.user.color
+    ? colorCorrector.calculate(message.user.color)
+    : "grey";
   return (
     <div className={classes.container}>
       <div className={classes.line}>
@@ -26,13 +32,11 @@ export const ChatLineComponent: React.FunctionComponent<Props> = ({
             badges={message.badges}
           />
         )}
-        <strong
-          style={{color: message.user.color}}
-          className={classes.name}
-        >
-          {message.user.displayName}:
+        <strong style={{color}} className={classes.name}>
+          {message.user.displayName}
+          {!message.isAction && ":"}
         </strong>
-        <ChatLineContent message={message} />
+        <ChatLineContent color={color} message={message} />
       </div>
     </div>
   );

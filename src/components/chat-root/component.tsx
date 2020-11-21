@@ -18,9 +18,11 @@ export const ChatRoot: React.FunctionComponent<Props> = (
   );
   const messages = useMessageStore();
 
-  useTwitchConnection(props.login, (message) =>
-    messages.addMessage(message),
-  );
+  useTwitchConnection(props.login, {
+    onMessage: messages.addMessage,
+    onUserTimeout: messages.timeoutUser,
+    onDeleteMessage: messages.deleteMessage,
+  });
 
   return (
     <div className={styles.container}>

@@ -18,6 +18,22 @@ export function useMessageStore() {
           return [...messages.slice(SLICE_LEVEL), message];
         });
       },
+      timeoutUser(login: string) {
+        if (login) {
+          setMessages((messages) =>
+            messages.filter(
+              (message) => message.user.login !== login,
+            ),
+          );
+        } else {
+          setMessages([]);
+        }
+      },
+      deleteMessage(id: string) {
+        setMessages((messages) =>
+          messages.filter((message) => message.id !== id),
+        );
+      },
     }),
     [messages],
   );
