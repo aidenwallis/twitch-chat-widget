@@ -1,8 +1,8 @@
 .container {
   position: relative;
   overflow: visible;
-  margin-top: 0.75rem;
-  padding-bottom: 5px;
+  margin-top: 0.5rem;
+  padding-bottom: 10px;
 }
 
 .line {
@@ -22,7 +22,7 @@
 
 @keyframes message-enter {
   from {
-    transform: translateY(5px);
+    transform: translateY(10px);
     opacity: 0;
   }
   to {

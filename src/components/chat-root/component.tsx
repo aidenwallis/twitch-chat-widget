@@ -16,7 +16,6 @@ export const ChatRoot: React.FunctionComponent<Props> = (
   const [channelBadges, globalBadges] = useChatBadges(
     props.channelID,
   );
-  const containerRef = React.useRef<HTMLDivElement>(null);
   const messages = useMessageStore();
 
   useTwitchConnection(props.login, (message) =>
@@ -24,11 +23,10 @@ export const ChatRoot: React.FunctionComponent<Props> = (
   );
 
   return (
-    <div className={styles.container} ref={containerRef}>
+    <div className={styles.container}>
       {messages.getMessages().map((message) => (
         <ChatLine
           channelBadges={channelBadges}
-          containerRef={containerRef}
           globalBadges={globalBadges}
           key={message.id}
           message={message}
