@@ -1,21 +1,25 @@
 .line {
   margin-top: 1rem;
-  padding: 1rem;
+  padding: 0.7rem;
+  line-height: 1.5;
+  vertical-align: middle;
   border-radius: 4px;
   background: var(--color-message-background);
   word-wrap: break-word;
-  animation: fadeIn 1s ease-in-out;
+  animation: message-enter 0.1s ease;
 }
 
 .name {
   margin-right: 5px;
 }
 
-@keyframes fadeIn {
+@keyframes message-enter {
   from {
+    transform: translateY(5px);
     opacity: 0;
   }
   to {
     opacity: 1;
+    transform: translateY(0px);
   }
 }

@@ -1,4 +1,5 @@
 import * as React from "react";
+import {useMessageContent} from "../../hooks/use-message-content";
 import {ChatMessage} from "../../models";
 import classes from "./styles.module.scss";
 
@@ -9,5 +10,6 @@ interface Props {
 export const ChatLineContent: React.FunctionComponent<Props> = ({
   message,
 }: Props) => {
-  return <span className={classes.content}>{message.content}</span>;
+  const content = useMessageContent(message);
+  return <span className={classes.content}>{content}</span>;
 };

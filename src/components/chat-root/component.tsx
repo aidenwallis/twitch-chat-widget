@@ -12,7 +12,9 @@ interface Props {
 export const ChatRoot: React.FunctionComponent<Props> = (
   props: Props,
 ) => {
-  const badges = useChatBadges(props.channelID);
+  const [channelBadges, globalBadges] = useChatBadges(
+    props.channelID,
+  );
   const messages = useMessageStore();
 
   useTwitchConnection(props.login, (message) =>
@@ -23,7 +25,8 @@ export const ChatRoot: React.FunctionComponent<Props> = (
     <div>
       {messages.getMessages().map((message) => (
         <ChatLine
-          badges={badges}
+          channelBadges={channelBadges}
+          globalBadges={globalBadges}
           key={message.id}
           message={message}
         />

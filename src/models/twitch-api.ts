@@ -1,5 +1,11 @@
-export interface TwitchAPIBadge {
-  image: string;
+export interface TwitchAPIBadgeVersion {
+  image_url_1x: string;
 }
 
-export type TwitchAPIBadgeResponse = Record<string, TwitchAPIBadge>;
+export interface TwitchAPIBadgeSet {
+  versions: Record<string, TwitchAPIBadgeVersion>;
+}
+
+export interface TwitchAPIBadgeResponse {
+  badge_sets: Record<string, TwitchAPIBadgeSet>;
+}

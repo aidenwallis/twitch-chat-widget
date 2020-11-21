@@ -6,18 +6,24 @@ import {ChatLineContent} from "../chat-line-content";
 import classes from "./styles.module.scss";
 
 interface Props {
-  badges: TwitchAPIBadgeResponse;
+  channelBadges: TwitchAPIBadgeResponse;
+  globalBadges: TwitchAPIBadgeResponse;
   message: ChatMessage;
 }
 
-export const ChatLine: React.FunctionComponent<Props> = ({
-  badges,
+export const ChatLineComponent: React.FunctionComponent<Props> = ({
+  channelBadges,
+  globalBadges,
   message,
 }: Props) => {
   return (
     <div className={classes.line}>
       {message.badges.length > 0 && (
-        <ChatLineBadges badgeMap={badges} badges={message.badges} />
+        <ChatLineBadges
+          channelBadges={channelBadges}
+          globalBadges={globalBadges}
+          badges={message.badges}
+        />
       )}
       <strong
         style={{color: message.user.color}}
@@ -29,3 +35,5 @@ export const ChatLine: React.FunctionComponent<Props> = ({
     </div>
   );
 };
+
+export const ChatLine = React.memo(ChatLineComponent);
