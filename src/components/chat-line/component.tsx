@@ -20,27 +20,31 @@ export const ChatLineComponent: React.FunctionComponent<Props> = ({
 }: Props) => {
   React.useEffect(() => {
     containerRef?.current &&
-      (containerRef.current.scrollTop =
-        containerRef?.current?.scrollHeight);
+      containerRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div className={classes.line}>
-      {message.badges.length > 0 && (
-        <ChatLineBadges
-          channelBadges={channelBadges}
-          globalBadges={globalBadges}
-          badges={message.badges}
-        />
-      )}
-      <strong
-        style={{color: message.user.color}}
-        className={classes.name}
-      >
-        {message.user.displayName}:
-      </strong>
-      <ChatLineContent message={message} />
+    <div className={classes.container}>
+      <div className={classes.line}>
+        {message.badges.length > 0 && (
+          <ChatLineBadges
+            channelBadges={channelBadges}
+            globalBadges={globalBadges}
+            badges={message.badges}
+          />
+        )}
+        <strong
+          style={{color: message.user.color}}
+          className={classes.name}
+        >
+          {message.user.displayName}:
+        </strong>
+        <ChatLineContent message={message} />
+      </div>
     </div>
   );
 };
