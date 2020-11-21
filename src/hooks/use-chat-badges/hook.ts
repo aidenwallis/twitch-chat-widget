@@ -1,6 +1,8 @@
 import {useEffect, useMemo, useState} from "react";
 import {TwitchAPIBadgeResponse} from "../../models/twitch-api";
-import {twitchApiClient} from "../../util/twitch-api-client";
+import {ApiClient} from "../../util/api-client";
+
+const twitchApiClient = new ApiClient({});
 
 type BadgeResponses = [
   TwitchAPIBadgeResponse,
