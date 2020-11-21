@@ -21,7 +21,7 @@ export const ChatLineComponent: React.FunctionComponent<Props> = ({
   React.useEffect(() => {
     containerRef?.current &&
       (containerRef.current.scrollTop =
-        containerRef?.current?.scrollHeight);
+        containerRef?.current?.scrollHeight * 2);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
