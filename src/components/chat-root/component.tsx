@@ -3,6 +3,7 @@ import {useChatBadges} from "../../hooks/use-chat-badges";
 import {useMessageStore} from "../../hooks/use-message-store";
 import {useTwitchConnection} from "../../hooks/use-twitch-connection";
 import {ChatLine} from "../chat-line";
+import styles from "./styles.module.scss";
 
 interface Props {
   channelID: string;
@@ -15,6 +16,7 @@ export const ChatRoot: React.FunctionComponent<Props> = (
   const [channelBadges, globalBadges] = useChatBadges(
     props.channelID,
   );
+  const containerRef = React.useRef<HTMLDivElement>(null);
   const messages = useMessageStore();
 
   useTwitchConnection(props.login, (message) =>
@@ -22,10 +24,11 @@ export const ChatRoot: React.FunctionComponent<Props> = (
   );
 
   return (
-    <div>
+    <div className={styles.container} ref={containerRef}>
       {messages.getMessages().map((message) => (
         <ChatLine
           channelBadges={channelBadges}
+          containerRef={containerRef}
           globalBadges={globalBadges}
           key={message.id}
           message={message}

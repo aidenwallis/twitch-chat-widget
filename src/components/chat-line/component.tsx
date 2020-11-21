@@ -6,6 +6,7 @@ import {ChatLineContent} from "../chat-line-content";
 import classes from "./styles.module.scss";
 
 interface Props {
+  containerRef: React.RefObject<HTMLDivElement>;
   channelBadges: TwitchAPIBadgeResponse;
   globalBadges: TwitchAPIBadgeResponse;
   message: ChatMessage;
@@ -13,9 +14,17 @@ interface Props {
 
 export const ChatLineComponent: React.FunctionComponent<Props> = ({
   channelBadges,
+  containerRef,
   globalBadges,
   message,
 }: Props) => {
+  React.useEffect(() => {
+    containerRef?.current &&
+      (containerRef.current.scrollTop =
+        containerRef?.current?.scrollHeight);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className={classes.line}>
       {message.badges.length > 0 && (
