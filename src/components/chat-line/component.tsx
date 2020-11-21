@@ -20,10 +20,8 @@ export const ChatLineComponent: React.FunctionComponent<Props> = ({
 }: Props) => {
   React.useEffect(() => {
     containerRef?.current &&
-      containerRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "end",
-      });
+      (containerRef.current.scrollTop =
+        containerRef?.current?.scrollHeight);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
