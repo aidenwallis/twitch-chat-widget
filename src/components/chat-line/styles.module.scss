@@ -11,7 +11,7 @@
   border-radius: 4px;
   background: var(--color-message-background);
   word-wrap: break-word;
-  animation: message-enter 0.15s ease, fade-out 1s ease 15s forwards;
+  animation: message-enter 0.15s ease, fade-out var(--message-transition-duration) ease var(--message-transition-delay) forwards;
   // transform: translateY(5px);
 }
 
