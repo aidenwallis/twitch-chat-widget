@@ -9,6 +9,8 @@ export function useMessageContent(message: ChatMessage) {
     bttvUserEmotes,
     ffzGlobalEmotes,
     ffzUserEmotes,
+    seventvGlobalEmotes,
+    seventvUserEmotes,
   } = useThirdPartyEmotes();
   const emoteMap = useMemo(
     () => ({
@@ -16,12 +18,16 @@ export function useMessageContent(message: ChatMessage) {
       ...ffzGlobalEmotes,
       ...ffzUserEmotes,
       ...bttvUserEmotes,
+      ...seventvGlobalEmotes,
+      ...seventvUserEmotes,
     }),
     [
       bttvGlobalEmotes,
       bttvUserEmotes,
       ffzGlobalEmotes,
       ffzUserEmotes,
+      seventvGlobalEmotes,
+      seventvUserEmotes,
     ],
   );
 

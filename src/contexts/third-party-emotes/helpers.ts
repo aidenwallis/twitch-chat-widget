@@ -10,6 +10,8 @@ import {
   FrankerfacezGlobalBody,
   FrankerfacezSet,
   FrankerfacezUserBody,
+  SeventvGlobalBody,
+  SeventvUserBody,
 } from "./types";
 
 const api = new ApiClient({});
@@ -115,5 +117,49 @@ export const getBTTVUserEmotes = (
     )
     .catch((error) => {
       console.error("Failed to get BTTV user emotes", error);
+      return {};
+    });
+
+export const get7TVGlobalEmotes = (): Promise<EmoteMap> =>
+  api
+    .get<SeventvGlobalBody>("https://api.7tv.app/v2/emotes/global")
+    .then((res) =>
+      res.body.reduce((acc, cur) => {
+        acc[cur.name] = new ThirdPartyEmote(
+          cur.id,
+          ThirdPartyEmoteProvider.BetterTTV,
+          cur.name,
+          ThirdPartyEmote.getSevenTVImageURL(cur.id),
+        );
+        return acc;
+      }, {} as EmoteMap),
+    )
+    .catch((error) => {
+      console.error("Failed to get 7TV global emotes", error);
+      return {};
+    });
+
+export const get7TVUserEmotes = (
+  channel: string,
+): Promise<EmoteMap> =>
+  api
+    .get<SeventvUserBody>(
+      `https://api.7tv.app/v2/users/${encodeURIComponent(
+        channel,
+      )}/emotes`,
+    )
+    .then((res) =>
+      [...(res?.body ?? [])].reduce((acc, cur) => {
+        acc[cur.name] = new ThirdPartyEmote(
+          cur.id,
+          ThirdPartyEmoteProvider.BetterTTV,
+          cur.name,
+          ThirdPartyEmote.getSevenTVImageURL(cur.id),
+        );
+        return acc;
+      }, {} as EmoteMap),
+    )
+    .catch((error) => {
+      console.error("Failed to get 7TV user emotes", error);
       return {};
     });
