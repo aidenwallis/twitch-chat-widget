@@ -1,5 +1,5 @@
-let twitchID = "94568374";
-let twitchLogin = "auror6s";
+let twitchID = "87763385";
+let twitchLogin = "aiden";
 const [
   customTwitchID,
   customTwitchLogin,
