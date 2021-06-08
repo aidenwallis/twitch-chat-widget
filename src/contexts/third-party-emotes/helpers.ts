@@ -139,13 +139,11 @@ export const get7TVGlobalEmotes = (): Promise<EmoteMap> =>
       return {};
     });
 
-export const get7TVUserEmotes = (
-  channel: string,
-): Promise<EmoteMap> =>
+export const get7TVUserEmotes = (login: string): Promise<EmoteMap> =>
   api
     .get<SeventvUserBody>(
       `https://api.7tv.app/v2/users/${encodeURIComponent(
-        channel,
+        login,
       )}/emotes`,
     )
     .then((res) =>

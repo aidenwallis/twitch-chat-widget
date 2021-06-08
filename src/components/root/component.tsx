@@ -7,7 +7,7 @@ export const Root: React.FunctionComponent = () => {
   return (
     <ThirdPartyEmotesProvider
       channelId={SETTINGS.TWITCH_ID}
-      channel={SETTINGS.TWITCH_LOGIN}
+      login={SETTINGS.TWITCH_LOGIN}
     >
       <ChatRoot
         channelID={SETTINGS.TWITCH_ID}

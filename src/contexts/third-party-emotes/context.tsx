@@ -22,7 +22,7 @@ export const ThirdPartyEmotesContext = React.createContext<ThirdPartyEmoteState>
 
 interface Props {
   channelId: string;
-  channel: string;
+  login: string;
   children: React.ReactNode;
 }
 
@@ -62,8 +62,8 @@ export const ThirdPartyEmotesProvider: React.FunctionComponent<Props> = (
   React.useEffect(() => {
     getFFZUserEmotes(props.channelId).then(setFfzUserEmotes);
     getBTTVUserEmotes(props.channelId).then(setBttvUserEmotes);
-    get7TVUserEmotes(props.channel).then(set7TVUserEmotes);
-  }, [props.channelId, props.channel]);
+    get7TVUserEmotes(props.login).then(set7TVUserEmotes);
+  }, [props.channelId, props.login]);
 
   return (
     <ThirdPartyEmotesContext.Provider
