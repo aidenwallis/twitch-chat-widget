@@ -52,7 +52,7 @@ export class MessageParser {
         split[placement.start] = (
           <ChatLineEmote
             name={name.join("")}
-            url={`https://static-cdn.jtvnw.net/emoticons/v1/${emote.id}/1.0`}
+            url={`https://static-cdn.jtvnw.net/emoticons/v2/${emote.id}/default/dark/1.0`}
           />
         );
 
