@@ -1,6 +1,6 @@
 # twitch-chat-widget
 
-The Twitch chat widget I use on my personal streams on [Twitch](https://twitch.tv/AidenWallis).
+The Twitch chat widget I use on my personal streams on [Twitch](https://twitch.tv/Aiden).
 
 Currently the Twitch ID and username is hardcoded with env variables because I am too lazy to add API support :).
 
