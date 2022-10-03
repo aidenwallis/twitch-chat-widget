@@ -36,7 +36,7 @@ export const ChatLineComponent: React.FunctionComponent<Props> = ({
           {message.user.displayName}
           {!message.isAction && ":"}
         </strong>
-        <ChatLineContent color={color} message={message} />
+        <ChatLineContent message={message} />
       </div>
     </div>
   );
