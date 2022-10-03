@@ -17,7 +17,7 @@ export const ChatLineContent: React.FunctionComponent<Props> = ({
   return (
     <span
       className={classes.content}
-      style={{color: message.isAction ? color : undefined}}
+      style={{fontStyle: message.isAction ? "italic" : "normal"}}
     >
       {content}
     </span>

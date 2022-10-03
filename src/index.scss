@@ -3,12 +3,11 @@
   --message-transition-duration: 1s;
   --message-transition-delay: 15s;
   --chat-text-size: 1rem;
+  --font-family: "Nunito", sans-serif;
+  --message-padding: 0.7rem;
+  --message-text-shadow: none;
 }
 
 * {
   box-sizing: border-box;
-}
-
-body {
-  font-family: "Nunito", sans-serif;
 }

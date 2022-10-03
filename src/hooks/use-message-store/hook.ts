@@ -1,7 +1,7 @@
 import {useMemo, useState} from "react";
 import {ChatMessage} from "../../models";
 
-const MAX_BUFFER = 10;
+const MAX_BUFFER = 250;
 // const MAX_LIFETIME = 60 * 1000;
 const SLICE_LEVEL = -Math.abs(MAX_BUFFER - 1);
 

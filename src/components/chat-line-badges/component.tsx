@@ -16,10 +16,10 @@ export const ChatLineBadges: React.FunctionComponent<Props> = (
     <span className={classes.badges}>
       {props.badges.map((badge) => {
         const badgeSrc =
-          props.channelBadges.badge_sets[badge.name]?.versions[
+          props?.channelBadges?.badge_sets?.[badge.name]?.versions[
             badge.version
           ]?.image_url_1x ||
-          props.globalBadges.badge_sets[badge.name]?.versions[
+          props?.globalBadges?.badge_sets?.[badge.name]?.versions[
             badge.version
           ].image_url_1x ||
           "";
