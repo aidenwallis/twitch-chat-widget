@@ -1,6 +1,7 @@
 export enum ThirdPartyEmoteProvider {
   BetterTTV,
   FrankerFaceZ,
+  SevenTV,
 }
 
 export class ThirdPartyEmote {
@@ -19,6 +20,13 @@ export class ThirdPartyEmote {
 
   public static getBetterttvImageURL(emoteId: string) {
     return `https://cdn.betterttv.net/emote/${encodeURIComponent(
+      emoteId,
+    )}/1x`;
+  }
+
+  public static getSevenTVImageURL(emoteId: string) {
+    console.log(emoteId);
+    return `https://cdn.7tv.app/emote/${encodeURIComponent(
       emoteId,
     )}/1x`;
   }

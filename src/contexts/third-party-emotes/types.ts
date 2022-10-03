@@ -5,6 +5,8 @@ export interface ThirdPartyEmoteState {
   ffzGlobalEmotes: EmoteMap;
   bttvUserEmotes: EmoteMap;
   bttvGlobalEmotes: EmoteMap;
+  seventvUserEmotes: EmoteMap;
+  seventvGlobalEmotes: EmoteMap;
 }
 
 export type EmoteMap = Record<string, ThirdPartyEmote>;
@@ -41,3 +43,12 @@ export interface BetterttvUserBody {
   channelEmotes: BetterttvEmote[];
   sharedEmotes: BetterttvEmote[];
 }
+
+export interface SeventvEmote {
+  id: string;
+  name: string;
+}
+
+export type SeventvGlobalBody = SeventvEmote[];
+
+export type SeventvUserBody = SeventvEmote[];

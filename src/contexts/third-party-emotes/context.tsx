@@ -1,5 +1,7 @@
 import * as React from "react";
 import {
+  get7TVGlobalEmotes,
+  get7TVUserEmotes,
   getBTTVGlobalEmotes,
   getBTTVUserEmotes,
   getFFZGlobalEmotes,
@@ -13,11 +15,14 @@ export const ThirdPartyEmotesContext = React.createContext<ThirdPartyEmoteState>
     bttvGlobalEmotes: {},
     ffzUserEmotes: {},
     ffzGlobalEmotes: {},
+    seventvGlobalEmotes: {},
+    seventvUserEmotes: {},
   },
 );
 
 interface Props {
   channelId: string;
+  login: string;
   children: React.ReactNode;
 }
 
@@ -39,16 +44,26 @@ export const ThirdPartyEmotesProvider: React.FunctionComponent<Props> = (
     bttvGlobalEmotes,
     setBttvGlobalEmotes,
   ] = React.useState<EmoteMap>({});
+  const [
+    seventvGlobalEmotes,
+    set7TVGlobalEmotes,
+  ] = React.useState<EmoteMap>({});
+  const [
+    seventvUserEmotes,
+    set7TVUserEmotes,
+  ] = React.useState<EmoteMap>({});
 
   React.useEffect(() => {
     getFFZGlobalEmotes().then(setFfzGlobalEmotes);
     getBTTVGlobalEmotes().then(setBttvGlobalEmotes);
+    get7TVGlobalEmotes().then(set7TVGlobalEmotes);
   }, []);
 
   React.useEffect(() => {
     getFFZUserEmotes(props.channelId).then(setFfzUserEmotes);
     getBTTVUserEmotes(props.channelId).then(setBttvUserEmotes);
-  }, [props.channelId]);
+    get7TVUserEmotes(props.login).then(set7TVUserEmotes);
+  }, [props.channelId, props.login]);
 
   return (
     <ThirdPartyEmotesContext.Provider
@@ -57,6 +72,8 @@ export const ThirdPartyEmotesProvider: React.FunctionComponent<Props> = (
         bttvUserEmotes,
         ffzUserEmotes,
         ffzGlobalEmotes,
+        seventvGlobalEmotes,
+        seventvUserEmotes,
       }}
     >
       {props.children}
