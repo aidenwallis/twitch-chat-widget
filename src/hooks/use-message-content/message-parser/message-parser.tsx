@@ -2,11 +2,22 @@ import * as React from "react";
 import {ChatLineEmote} from "../../../components/chat-line-emote";
 import {EmoteMap} from "../../../contexts/third-party-emotes";
 import {ChatMessage} from "../../../models";
+import {isEmoteOnly} from "../../../settings";
+
+export const isMessageEmpty = (nodes: React.ReactNode[]) => {
+  for (const node of nodes) {
+    if (node !== null) {
+      return false;
+    }
+  }
+  return true;
+};
 
 export class MessageParser {
   public static parseThirdPartyEmotes(
     emotes: EmoteMap,
     splits: React.ReactNode[],
+    emoteOnly?: boolean,
   ) {
     const res: React.ReactNode[] = [];
     const _matchWord = (word: string): React.ReactNode => {
@@ -16,7 +27,7 @@ export class MessageParser {
           <ChatLineEmote name={emote.name} url={emote.imageUrl} />
         );
       }
-      return word;
+      return emoteOnly ? null : word;
     };
 
     let buffer = "";
@@ -52,7 +63,9 @@ export class MessageParser {
         split[placement.start] = (
           <ChatLineEmote
             name={name.join("")}
-            url={`https://static-cdn.jtvnw.net/emoticons/v2/${emote.id}/default/dark/1.0`}
+            url={`https://static-cdn.jtvnw.net/emoticons/v2/${
+              emote.id
+            }/default/dark/${isEmoteOnly() ? "3" : "1"}.0`}
           />
         );
 

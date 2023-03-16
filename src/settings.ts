@@ -20,7 +20,7 @@ if (customTwitchID && customTwitchLogin) {
   twitchLogin = customTwitchLogin;
 }
 
-const validThemes = new Set(["default", "simple"]);
+const validThemes = new Set(["default", "simple", "emote"]);
 
 // TODO: This sucks :)
 export const SETTINGS = {
@@ -30,3 +30,7 @@ export const SETTINGS = {
     ? params.theme || "default"
     : "default",
 };
+
+export function isEmoteOnly() {
+  return SETTINGS.theme === "emote";
+}

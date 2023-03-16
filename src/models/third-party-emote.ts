@@ -1,3 +1,5 @@
+import {isEmoteOnly} from "../settings";
+
 export enum ThirdPartyEmoteProvider {
   BetterTTV,
   FrankerFaceZ,
@@ -15,19 +17,19 @@ export class ThirdPartyEmote {
   public static getFrankerfacezImageURL(emoteId: number) {
     return `https://cdn.frankerfacez.com/emote/${encodeURIComponent(
       emoteId,
-    )}/1`;
+    )}/${isEmoteOnly() ? "3" : "1"}`;
   }
 
   public static getBetterttvImageURL(emoteId: string) {
     return `https://cdn.betterttv.net/emote/${encodeURIComponent(
       emoteId,
-    )}/1x`;
+    )}/${isEmoteOnly() ? "3" : "1"}x`;
   }
 
   public static getSevenTVImageURL(emoteId: string) {
     console.log(emoteId);
     return `https://cdn.7tv.app/emote/${encodeURIComponent(
       emoteId,
-    )}/1x`;
+    )}/${isEmoteOnly() ? "3" : "1"}x.webp`;
   }
 }

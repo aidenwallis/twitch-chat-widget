@@ -1,9 +1,11 @@
 import * as React from "react";
 import {ChatMessage} from "../../models";
 import {TwitchAPIBadgeResponse} from "../../models/twitch-api";
+import {isEmoteOnly} from "../../settings";
 import {ColorCorrection} from "../../util/color-correction";
 import {ChatLineBadges} from "../chat-line-badges";
 import {ChatLineContent} from "../chat-line-content";
+import {ChatLineEmotes} from "../chat-line-emotes";
 import classes from "./styles.module.scss";
 
 interface Props {
@@ -19,6 +21,10 @@ export const ChatLineComponent: React.FunctionComponent<Props> = ({
   globalBadges,
   message,
 }: Props) => {
+  if (isEmoteOnly()) {
+    return <ChatLineEmotes message={message} />;
+  }
+
   const color = message.user.color
     ? colorCorrector.calculate(message.user.color)
     : "grey";

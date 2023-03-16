@@ -3,7 +3,10 @@ import {ChatMessage} from "../../models";
 import {useThirdPartyEmotes} from "../use-third-party-emotes";
 import {MessageParser} from "./message-parser";
 
-export function useMessageContent(message: ChatMessage) {
+export function useMessageContent(
+  message: ChatMessage,
+  emoteOnly = false,
+) {
   const {
     bttvGlobalEmotes,
     bttvUserEmotes,
@@ -34,5 +37,6 @@ export function useMessageContent(message: ChatMessage) {
   return MessageParser.parseThirdPartyEmotes(
     emoteMap,
     MessageParser.parseEmotes(message),
+    emoteOnly,
   );
 }
