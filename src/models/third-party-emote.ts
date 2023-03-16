@@ -27,7 +27,6 @@ export class ThirdPartyEmote {
   }
 
   public static getSevenTVImageURL(emoteId: string) {
-    console.log(emoteId);
     return `https://cdn.7tv.app/emote/${encodeURIComponent(
       emoteId,
     )}/${isEmoteOnly() ? "3" : "1"}x.webp`;
