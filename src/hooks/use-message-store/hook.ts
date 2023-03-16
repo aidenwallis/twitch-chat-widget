@@ -47,7 +47,7 @@ export function useMessageStore() {
         );
       },
     }),
-    [messages],
+    [messages, parser],
   );
 
   return actions;
