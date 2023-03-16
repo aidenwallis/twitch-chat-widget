@@ -1,4 +1,5 @@
 import {IRCMessage} from "irc-message-ts";
+import React from "react";
 import {ChatBadge} from "./chat-badge";
 import {ChatEmote} from "./chat-emote";
 import {ChatEmotePlacement} from "./chat-emote-placement";
@@ -12,6 +13,8 @@ export class ChatMessage {
   public readonly id: string = "";
   public readonly isAction: boolean = false;
   public readonly content: string = "";
+  public isEmoteOnly = false;
+  public parsedNodes: React.ReactNode[] = [];
   public readonly emotes: ChatEmote[] = [];
   public readonly user: ChatMessageUser;
   public readonly createdAt = Date.now();

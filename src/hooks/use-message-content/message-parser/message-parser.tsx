@@ -6,7 +6,7 @@ import {isEmoteOnly} from "../../../settings";
 
 export const isMessageEmpty = (nodes: React.ReactNode[]) => {
   for (const node of nodes) {
-    if (node !== null) {
+    if (node !== null && typeof node === "object") {
       return false;
     }
   }
