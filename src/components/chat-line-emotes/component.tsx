@@ -18,7 +18,9 @@ export const ChatLineEmotes: React.FunctionComponent<Props> = ({
 
   return (
     <div>
-      <span className={classes.content}>{content}</span>
+      <span className={classes.content}>
+        {content.find((node) => node !== null)}
+      </span>
     </div>
   );
 };
