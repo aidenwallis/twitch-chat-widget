@@ -1,49 +1,40 @@
 import {useEffect, useMemo, useState} from "react";
-import {TwitchAPIBadgeResponse} from "../../models/twitch-api";
+import {
+  BadgeMaps,
+  CachedBadges,
+  constructMapping,
+} from "../../models/fossabot";
 import {ApiClient} from "../../util/api-client";
 
-const twitchApiClient = new ApiClient({});
+const api = new ApiClient({});
 
-type BadgeResponses = [
-  TwitchAPIBadgeResponse,
-  TwitchAPIBadgeResponse,
-];
-
-export function useChatBadges(channelID: string): BadgeResponses {
-  const [
-    globalBadges,
-    setGlobalBadges,
-  ] = useState<TwitchAPIBadgeResponse>({badge_sets: {}});
-  const [
-    channelBadges,
-    setChannelBadges,
-  ] = useState<TwitchAPIBadgeResponse>({
-    badge_sets: {},
-  });
-  const resp = useMemo<BadgeResponses>(
-    () => [channelBadges, globalBadges],
+export function useChatBadges(channelID: string) {
+  const [globalBadges, setGlobalBadges] = useState<BadgeMaps>({});
+  const [channelBadges, setChannelBadges] = useState<BadgeMaps>({});
+  const resp = useMemo(
+    () => [channelBadges, globalBadges] as const,
     [channelBadges, globalBadges],
   );
 
   useEffect(() => {
-    twitchApiClient
-      .get<TwitchAPIBadgeResponse>(
-        "https://badges.twitch.tv/v1/badges/global/display?language=en",
+    api
+      .get<CachedBadges>(
+        "https://api.fossabot.com/v2/cached/twitch/badges/global",
       )
-      .then((res) => setGlobalBadges(res.body))
+      .then((res) => setGlobalBadges(constructMapping(res.body)))
       .catch((err) =>
         console.error("Failed to get global badges", err),
       );
   }, []);
 
   useEffect(() => {
-    twitchApiClient
-      .get<TwitchAPIBadgeResponse>(
-        `https://badges.twitch.tv/v1/badges/channels/${encodeURIComponent(
+    api
+      .get<CachedBadges>(
+        `https://api.fossabot.com/v2/cached/twitch/badges/users/${encodeURIComponent(
           channelID,
-        )}/display?language=en`,
+        )}`,
       )
-      .then((res) => setChannelBadges(res.body))
+      .then((res) => setChannelBadges(constructMapping(res.body)))
       .catch((err) => console.error("Failed to get badges", err));
   }, [channelID]);
 

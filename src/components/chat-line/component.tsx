@@ -1,6 +1,6 @@
 import * as React from "react";
 import {ChatMessage} from "../../models";
-import {TwitchAPIBadgeResponse} from "../../models/twitch-api";
+import type {BadgeMaps} from "../../models/fossabot";
 import {isEmoteOnly} from "../../settings";
 import {ColorCorrection} from "../../util/color-correction";
 import {ChatLineBadges} from "../chat-line-badges";
@@ -9,8 +9,8 @@ import {ChatLineEmotes} from "../chat-line-emotes";
 import classes from "./styles.module.scss";
 
 interface Props {
-  channelBadges: TwitchAPIBadgeResponse;
-  globalBadges: TwitchAPIBadgeResponse;
+  channelBadges: BadgeMaps;
+  globalBadges: BadgeMaps;
   message: ChatMessage;
 }
 

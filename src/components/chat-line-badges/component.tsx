@@ -1,11 +1,11 @@
 import * as React from "react";
 import {ChatBadge} from "../../models/chat-badge";
-import {TwitchAPIBadgeResponse} from "../../models/twitch-api";
+import type {BadgeMaps} from "../../models/fossabot";
 import classes from "./styles.module.scss";
 
 interface Props {
-  channelBadges: TwitchAPIBadgeResponse;
-  globalBadges: TwitchAPIBadgeResponse;
+  channelBadges: BadgeMaps;
+  globalBadges: BadgeMaps;
   badges: ChatBadge[];
 }
 
@@ -16,12 +16,10 @@ export const ChatLineBadges: React.FunctionComponent<Props> = (
     <span className={classes.badges}>
       {props.badges.map((badge) => {
         const badgeSrc =
-          props?.channelBadges?.badge_sets?.[badge.name]?.versions[
-            badge.version
-          ]?.image_url_1x ||
-          props?.globalBadges?.badge_sets?.[badge.name]?.versions[
-            badge.version
-          ].image_url_1x ||
+          props?.channelBadges?.[badge.name]?.[badge.version]
+            ?.asset_1x?.url ||
+          props?.globalBadges?.[badge.name]?.[badge.version]?.asset_1x
+            ?.url ||
           "";
         if (!badgeSrc) return null;
         return (
