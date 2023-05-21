@@ -1,4 +1,4 @@
 [[redirects]]
   from = "/*"
-  to = "/index.html"
-  status = 200
+  to = "https://chatwidget.fossadev.com/:splat"
+  status = 302
